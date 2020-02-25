@@ -1,0 +1,38 @@
+.demo-card-wide.mdl-card {
+  margin: 50px auto auto;
+  padding: 20px 50px;
+}
+
+.inputs {
+  display: flex;
+  align-items: center;
+}
+
+.inputs input {
+  height: 22px;
+  border-radius: 4px;
+  background: none;
+  background: white;
+  border: 1px solid #c4c4c4;
+}
+
+#toDoList {
+   list-style-type: none;
+   padding: 0;
+}
+
+#toDoList li {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+#toDoList li span {
+  margin-left: 5px;
+}
+
+#toDoList li button {
+  text-align: right;
+}
