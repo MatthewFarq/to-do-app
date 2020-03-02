@@ -3,6 +3,12 @@
 function onReady() {
   let id = 0;
   let toDos = [];
+  const localStore = localStorage.getItem('myTodos');
+
+  if (localStore) {
+    toDos = JSON.parse(localStore);
+  }
+
   const addToDoForm = document.getElementById('addToDoForm');
 
   function createNewToDo() {
@@ -20,6 +26,7 @@ function onReady() {
     newToDoText.value = '';
 
     renderTheUI();
+    localStorage.setItem('myTodos', JSON.stringify(toDos));
   }
 
   function renderTheUI() {
@@ -31,11 +38,28 @@ function onReady() {
       const newLi = document.createElement('li');
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
+      checkbox.checked = toDo.complete;
+
+      checkbox.addEventListener('change', (event) => {
+        toDo.complete = !toDo.complete;
+        localStorage.setItem('myTodos', JSON.stringify(toDos));
+      });
+
       const deleteButton = document.createElement('button');
+
+      deleteButton.classList.add(
+        'delete-button', 'mdl-button', 'mdl-js-button', 'mdl-button--icon');
+
+      let buttonIcon = document.createElement('i');
+      buttonIcon.classList.add('material-icons');
+      buttonIcon.textContent = 'clear';
+
+      //append icon to button
+      deleteButton.appendChild(buttonIcon);
       deleteButton.addEventListener('click', event => {
-        event.preventDefault();
         toDos = toDos.filter(item => item.id !== toDo.id);
         renderTheUI();
+        localStorage.setItem('myTodos', JSON.stringify(toDos));
       });
       newLi.textContent = toDo.title;
 
